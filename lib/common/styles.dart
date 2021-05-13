@@ -21,3 +21,5 @@ final tabbarContainerStyle = BoxDecoration(
 );
 
 const labelStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 15);
+const cardTitleStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
+const cardAmountStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 25);

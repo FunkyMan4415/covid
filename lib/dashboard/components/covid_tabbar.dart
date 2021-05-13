@@ -1,5 +1,6 @@
 import 'package:covid/common/colors.dart';
 import 'package:covid/common/styles.dart';
+import 'package:covid/dashboard/components/covid_card.dart';
 import 'package:flutter/material.dart';
 
 class CovidTabbar extends StatefulWidget {
@@ -29,29 +30,59 @@ class _CovidTabbarState extends State<CovidTabbar>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(0),
-      padding: const EdgeInsets.all(8),
-      decoration: tabbarContainerStyle,
-      child: TabBar(
-        controller: _tabController,
-        indicator: tabbarIndicatorStyle,
-        labelStyle: labelStyle,
-        labelColor: CovidColors.labelColor,
-        unselectedLabelColor: CovidColors.unselectedLabelColor,
-        tabs: const [
-          // first tab [you can add an icon using the icon property]
-          Tab(
-            text: 'Country',
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.all(0),
+          padding: const EdgeInsets.all(8),
+          decoration: tabbarContainerStyle,
+          child: TabBar(
+            controller: _tabController,
+            indicator: tabbarIndicatorStyle,
+            labelStyle: labelStyle,
+            labelColor: CovidColors.labelColor,
+            unselectedLabelColor: CovidColors.unselectedLabelColor,
+            tabs: const [
+              // first tab [you can add an icon using the icon property]
+              Tab(
+                text: 'Country',
+              ),
+              Tab(
+                text: 'State',
+              ),
+              Tab(
+                text: 'Worldwide',
+              ),
+            ],
           ),
-          Tab(
-            text: 'State',
+        ),
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.only(top: 20),
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    childAspectRatio: 3 / 2,
+                    crossAxisCount: 2,
+                  ),
+                  itemCount: 4,
+                  itemBuilder: (context, index) => CovidCard(
+                    color: Colors.blue,
+                    title: 'Confirmed',
+                    amount: '3.876.542',
+                  ),
+                ),
+                Text('2'),
+                Text('3'),
+              ],
+            ),
           ),
-          Tab(
-            text: 'Worldwide',
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
